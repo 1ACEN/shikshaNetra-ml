@@ -7,3 +7,9 @@ pymongo
 transformers
 mediapipe
 opencv-python
+nltk
+sentence-transformers
+google-generativeai
+moviepy
+streamlit
+python-dotenv
