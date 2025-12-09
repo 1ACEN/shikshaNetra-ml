@@ -6,7 +6,7 @@ fastapi
 pymongo
 transformers
 mediapipe
-opencv-python
+opencv-python-headless
 nltk
 sentence-transformers
 google-generativeai
