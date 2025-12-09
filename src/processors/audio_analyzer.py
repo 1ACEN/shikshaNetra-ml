@@ -5,9 +5,7 @@ from config.settings import SAMPLE_RATE, SPEECH_THRESHOLD_DB
 
 class AudioAnalyzer:
     def __init__(self, audio_path):
-        """
-        Initialize the AudioAnalyzer with the path to an audio file.
-        """
+        
         if not os.path.exists(audio_path):
             raise FileNotFoundError(f"Audio file not found: {audio_path}")
         
@@ -18,9 +16,6 @@ class AudioAnalyzer:
             raise RuntimeError(f"Failed to load audio file: {e}")
 
     def analyze_clarity(self):
-        """
-        Calculate a Clarity score (0-100) based on silence and pauses.
-        """
         # Detect non-silent intervals
         non_silent_intervals = librosa.effects.split(self.y, top_db=SPEECH_THRESHOLD_DB)
         
@@ -46,9 +41,6 @@ class AudioAnalyzer:
         return round(clarity_score, 2)
 
     def analyze_confidence(self):
-        """
-        Calculate a Confidence score (0-100) based on pitch stability and loudness.
-        """
         # 1. Pitch Stability using pyin (probabilistic YIN)
         f0, voiced_flag, voiced_probs = librosa.pyin(
             self.y, fmin=librosa.note_to_hz('C2'), fmax=librosa.note_to_hz('C7')
@@ -94,9 +86,6 @@ class AudioAnalyzer:
         return mfccs_mean.tolist()
 
     def analyze(self):
-        """
-        Perform full analysis and return results.
-        """
         return {
             "clarity_score": self.analyze_clarity(),
             "confidence_score": self.analyze_confidence(),

@@ -8,6 +8,6 @@ SPEECH_THRESHOLD_DB = 20
 FRAME_EXTRACTION_RATE = 30
 
 # GenAI Constants
-LLM_MODEL_NAME = "gemini-3-pro"
+LLM_MODEL_NAME = "gemini-2.5-pro"
 
 # Future configurations can be added here

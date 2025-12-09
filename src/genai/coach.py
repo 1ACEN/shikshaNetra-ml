@@ -8,10 +8,6 @@ load_dotenv()
 
 class ShikshaCoach:
     def __init__(self):
-        """
-        Initialize the ShikshaCoach with Google Generative AI.
-        Expects GEMINI_API_KEY or GOOGLE_API_KEY in environment variables.
-        """
         api_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
         
         if not api_key:
@@ -32,15 +28,10 @@ class ShikshaCoach:
         )
 
     def generate_comprehensive_report(self, transcript, scores_dict, topic, language="English"):
-        """
-        Generate a comprehensive pedagogical report by integrating multiple analysis features.
-        """
+
         if not self.model:
             return {"error": "GenAI model not initialized."}
 
-        # We will construct a single complex prompt to get all features in one go for efficiency,
-        # but we structure the prompt to explicitly request each feature as a separate section.
-        
         prompt = f"""
         {self._get_system_instruction()}
         
@@ -88,9 +79,7 @@ class ShikshaCoach:
             return {"error": f"GenAI generation failed: {e}"}
 
     def chat_with_coach(self, query, context_history):
-        """
-        Conversational interface for the coach using RAG-like context.
-        """
+
         if not self.model:
             return "I'm sorry, I cannot answer that right now because my brain (LLM) is not connected."
 
@@ -114,11 +103,7 @@ class ShikshaCoach:
             return f"Error generating response: {e}"
 
     def _parse_json_response(self, response_text):
-        """
-        Helper to safely parse JSON from LLM output.
-        """
         try:
-            # Clean up potential markdown formatting
             clean_text = response_text.replace("```json", "").replace("```", "").strip()
             return json.loads(clean_text)
         except json.JSONDecodeError:

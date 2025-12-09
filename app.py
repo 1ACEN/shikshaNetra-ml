@@ -6,15 +6,30 @@ from src.pipeline import process_session
 
 st.set_page_config(page_title="Shiksha Netra", page_icon="🎓", layout="wide")
 
+# API Key Handling
+if "GEMINI_API_KEY" not in os.environ:
+    if "GEMINI_API_KEY" in st.secrets:
+        os.environ["GEMINI_API_KEY"] = st.secrets["GEMINI_API_KEY"]
+
 st.title("🎓 Shiksha Netra - AI Pedagogical Coach")
 st.markdown("Upload a teaching session video to get comprehensive AI feedback.")
 
 # Sidebar for configuration
 with st.sidebar:
     st.header("Configuration")
-    topic = st.text_input("Session Topic", value="General")
     
-    st.info("Ensure you have set your GEMINI_API_KEY in your environment variables.")
+    # API Key Input (if not set in env or secrets)
+    if "GEMINI_API_KEY" not in os.environ:
+        api_key_input = st.text_input("Enter Gemini API Key", type="password")
+        if api_key_input:
+            os.environ["GEMINI_API_KEY"] = api_key_input
+            st.success("API Key set for this session!")
+        else:
+            st.warning("API Key is required to generate feedback.")
+    else:
+        st.success("API Key is configured.")
+
+    topic = st.text_input("Session Topic", value="General")
 
 # File Uploader
 uploaded_file = st.file_uploader("Choose a video file", type=['mp4', 'mov', 'avi', 'mkv'])
