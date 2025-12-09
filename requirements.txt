@@ -10,7 +10,7 @@ opencv-python-headless
 nltk
 sentence-transformers
 google-generativeai
-moviepy
+moviepy==1.0.3
 streamlit
 python-dotenv
 gunicorn
