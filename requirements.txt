@@ -13,3 +13,5 @@ google-generativeai
 moviepy
 streamlit
 python-dotenv
+gunicorn
+uvicorn
