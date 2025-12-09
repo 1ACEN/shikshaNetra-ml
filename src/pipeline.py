@@ -1,7 +1,8 @@
 import os
 import json
 import time
-from moviepy.editor import VideoFileClip, AudioFileClip
+from moviepy.video.io.VideoFileClip import VideoFileClip
+from moviepy.audio.io.AudioFileClip import AudioFileClip
 from src.processors.audio_analyzer import AudioAnalyzer
 from src.processors.video_analyzer import VideoAnalyzer
 from src.processors.text_analyzer import TextAnalyzer
